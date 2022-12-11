@@ -12,7 +12,7 @@ import { config } from 'src/config';
 export const useAuthStore = defineStore('auth', () => {
   const data = useDataStore();
 
-  const error = ref<boolean>(true);
+  const error = ref<boolean>(false);
   const user = ref();
   const loading = ref<boolean>(true);
 
