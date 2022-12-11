@@ -12,7 +12,9 @@
       <q-card-section class="row justify-between items-center">
         <div class="">
           <div class="text-h5 text-weight-bold">
-            {{ main.getSelectItem?.range[0] }}-{{ main.getSelectItem?.range[1] }}
+            {{ main.getSelectItem?.range[0] }}-{{
+              main.getSelectItem?.range[1]
+            }}
             баллов
           </div>
           <q-separator />
@@ -26,7 +28,7 @@
           @click="main.changeStateMenu"
         />
       </q-card-section>
-      <q-card-section class="q-my-lg text-subtitle1">
+      <q-card-section class="text-subtitle1">
         <q-list padding>
           <q-item>
             <q-item-section>Баланс</q-item-section>
@@ -98,6 +100,7 @@
           class="col-12"
           color="positive"
           :label="`Оформить заказ  ${counter}  шт.`"
+          @click="createOrder"
         />
       </div>
     </q-card>
@@ -108,12 +111,18 @@
 import { ref, computed, onUpdated } from 'vue';
 import { useMainStore } from 'stores/Main/main';
 import { useQuasar } from 'quasar';
+import { fetchBotData } from 'src/api';
+import { useAuthStore } from 'stores/Auth/auth';
+import { config } from 'src/config';
 
 const main = useMainStore();
+const auth = useAuthStore();
 const $q = useQuasar();
 
 const counter = ref<number>(1);
-const price = ref<number>(100);
+const price = ref<number | undefined>(100);
+const loading = ref<boolean>(false);
+
 const increment = () => {
   counter.value++;
   if (counter.value === 20) {
@@ -130,13 +139,35 @@ const decrement = () => {
 };
 
 const calcPrice = computed(() => price.value * counter.value);
+
+const createOrder = () => {
+  loading.value = true;
+  fetchBotData('create-order', {
+    id: auth.getUser?.telegram_id,
+    public_key: config.SECRET,
+    secret_user_key: auth.getUser?.secret_user_key,
+    range: main.getSelectItem?.range,
+    count: counter.value,
+  }).then((response) => {
+    if (response?.data.result) window.Telegram.WebApp.close();
+    else {
+      loading.value = false;
+      auth.createError({
+        state: true,
+        message: response?.data.message,
+        reload: false,
+      });
+    }
+  });
+};
 onUpdated(() => {
   counter.value = 1;
+  price.value = main.getSelectItem?.price;
 });
 </script>
 
 <style lang="scss" scoped>
 .menu-outline {
-  outline: 2px solid #e3e3e3;
+  outline: 1px solid #e3e3e3;
 }
 </style>

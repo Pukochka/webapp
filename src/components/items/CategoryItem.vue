@@ -13,7 +13,7 @@
     <div class="q-pa-sm q-pt-lg flex">
       <div class="row full-width">
         <div
-          class="text-bold text-black text-subtitle1 rounded-borders bg-red-4 q-px-sm col"
+          class="text-bold text-black text-subtitle1 rounded-borders q-px-sm col"
         >
           {{ category?.range[0] }} - {{ category?.range[1] }} баллов
         </div>

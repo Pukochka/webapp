@@ -1,16 +1,18 @@
 <template>
-  <q-dialog v-model="auth.errorHadler">
+  <q-dialog v-model="auth.errorHadler.state" persistent>
     <q-card>
       <q-card-section>
         <div class="text-h6">Походу что-то пошло не так...</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        Проблемы с интернетом. Попробуйте перезагрузить страницу.
+        {{ auth.errorHadler.message }}
       </q-card-section>
 
       <q-card-actions align="right">
+        <q-btn flat size="md" label="Закрыть" color="red" v-close-popup />
         <q-btn
+          v-if="auth.errorHadler.reload"
           flat
           size="md"
           label="Перезарузить"

@@ -46,6 +46,12 @@ const changeRegion = () => {
       main.changeStateChangeRegion({ new_code: '' }, false);
       data.initUser(response.data.data);
       data.changeProducts();
+    } else {
+      auth.createError({
+        state: true,
+        message: response?.data.message,
+        reload: false,
+      });
     }
   });
 };

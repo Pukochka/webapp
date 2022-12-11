@@ -10,7 +10,7 @@
     <div class="q-pa-sm flex">
       <div class="row full-width">
         <div
-          class="text-weight-bolder text-subtitle1 text-black rounded-borders bg-red-4 col q-mt-md q-px-sm"
+          class="text-bold text-subtitle1 text-black rounded-borders col q-mt-md q-px-sm"
         >
           {{ product?.range[0] }}-{{ product?.range[1] }} баллов
         </div>
@@ -26,7 +26,7 @@
           text-color="red"
           class="col"
           align="left"
-          :label="product?.price + ' Р'"
+          :label="product?.price + ' ₽'"
         />
         <q-btn
           dense

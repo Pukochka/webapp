@@ -14,8 +14,24 @@ export const useAuthStore = defineStore('auth', () => {
   const data = useDataStore();
   const user = ref<TelegramUser>();
 
-  const error = ref<boolean>(false);
+  const error = ref({
+    state: false,
+    message: 'Проблемы с интернетом. Попробуйте перезагрузить страницу.',
+    reload: true,
+  });
   const loading = ref<boolean>(true);
+
+  const createError = (value: {
+    state: boolean;
+    message: string;
+    reload: boolean;
+  }) => {
+    error.value = {
+      state: value.state,
+      message: value.message,
+      reload: value.reload,
+    };
+  };
 
   const _init = () => (loading.value = true);
   fetchRegionsData('index').then((response) => {
@@ -40,10 +56,19 @@ export const useAuthStore = defineStore('auth', () => {
             }
           );
         } else {
-          error.value = true;
+          createError({
+            state:true,
+            message:response?.data.message,
+            reload:true,
+          })
         }
       });
     } else {
+      createError({
+        state:true,
+        message:response?.data.message,
+        reload:true,
+      })
     }
   });
 
@@ -55,6 +80,7 @@ export const useAuthStore = defineStore('auth', () => {
     getLoading,
     errorHadler,
     getUser,
+    createError,
     _init,
   };
 });
