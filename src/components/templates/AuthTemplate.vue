@@ -1,4 +1,5 @@
 <template>
+  <div class="text-h6">Для авторизации, выберите ваш регион</div>
   <div class="q-pa-md">
     <q-input
       v-model="text"
@@ -48,6 +49,7 @@
         color="red"
         icon="check"
         label="Выбрать регион"
+        @click="register"
         :disable="selected_region.code === -1"
       />
     </div>
@@ -58,9 +60,10 @@
 import { computed, ref } from 'vue';
 import { useDataStore } from 'stores/Data/data';
 import { useMainStore } from 'stores/Main/main';
-import { userAuth } from 'src/api';
+import { fetchUserData, userAuth } from 'src/api';
 import { Regions } from 'src/types';
 import { useAuthStore } from 'stores/Auth/auth';
+import { config } from 'src/config';
 const data = useDataStore();
 const main = useMainStore();
 const auth = useAuthStore();
@@ -68,6 +71,18 @@ const auth = useAuthStore();
 auth._init();
 
 const text = ref<string>('');
+
+const register = () => {
+  fetchUserData('create', {
+    id: auth.getUser?.telegram_id,
+    region: selected_region.value.new_code,
+  }).then((response) => {
+    if (response?.data.result) {
+      data.initUser(response.data.data);
+      main.changeTemplate('catalog');
+    }
+  });
+};
 
 const selected_region = ref<Regions>({
   rcode: -1,

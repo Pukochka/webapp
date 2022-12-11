@@ -28,6 +28,7 @@ import { ref } from 'vue';
 import { useMainStore } from 'stores/Main/main';
 import { fetchUserData } from 'src/api';
 import { useDataStore } from 'stores/Data/data';
+import { config } from '../../config';
 const main = useMainStore();
 const data = useDataStore();
 const loading = ref<boolean>(false);
@@ -35,7 +36,7 @@ const loading = ref<boolean>(false);
 const changeRegion = () => {
   loading.value = true;
   fetchUserData('update', {
-    id: 1028741753,
+    id: config.BOT_ID,
     region: main.getChangeRegion.region.new_code,
   }).then((response) => {
     if (response?.data.result) {

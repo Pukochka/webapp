@@ -18,7 +18,9 @@ for (const item of new URLSearchParams(window.location.search)) {
 
 export const config = {
   HOST: 'https://m.bot-t.com',
-  INIT_DATA: window.Telegram.WebApp.initData ?? init,
+  INIT_DATA: window.Telegram.WebApp.initData.length
+    ? window.Telegram.WebApp.initData
+    : init,
   BOT_ID: bot_id,
   SECRET: secret,
 };

@@ -36,6 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
                   }
                 );
               } else {
+                loading.value = false;
               }
             }
           );
