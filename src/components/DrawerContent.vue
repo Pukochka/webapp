@@ -1,7 +1,11 @@
 <template>
   <div class="bg-red-1 q-pa-md rounded-borders q-ma-md">
-    <div class="text-h5 text-weight-bolder">Артемий Пуко</div>
-    <div class="text-caption text-weight-bolder text-red-4">@melart</div>
+    <div class="text-h5 text-weight-bolder">
+      {{ user.getUser?.first_name }} {{ user.getUser?.last_name }}
+    </div>
+    <div class="text-caption text-weight-bolder text-red-4">
+      {{ user.getUser?.username }}
+    </div>
   </div>
   <q-list padding class="q-px-md column q-gutter-xs">
     <q-item clickable v-ripple class="rounded-borders">
@@ -25,7 +29,9 @@
         /> </q-item-section
       ><q-item-section>Баланс</q-item-section>
       <q-item-section avatar>
-        <div class="text-red-4 text-subtitle1">1000 Р</div>
+        <div class="text-red-4 text-subtitle1">
+          {{ user.getUser?.balance + user.getUser?.currency }}
+        </div>
       </q-item-section>
     </q-item>
     <q-item clickable v-ripple class="rounded-borders" @click="$emit('close')">
@@ -50,7 +56,8 @@ const emit = defineEmits<{
   (e: 'close'): void;
 }>();
 import { useDataStore } from 'stores/Data/data';
-
+import { useAuthStore } from 'stores/Auth/auth';
+const user = useAuthStore();
 const data = useDataStore();
 </script>
 

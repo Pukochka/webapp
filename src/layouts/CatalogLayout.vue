@@ -11,6 +11,7 @@
           <div class="q-ml-sm q-mt-xs">Магнит</div>
         </q-toolbar-title>
         <q-btn-dropdown
+          v-if="main.getTemplate !== 'auth'"
           dense
           color="red"
           class="text-weight-bolder ellipsis"
@@ -51,7 +52,11 @@
 
       <router-view />
     </q-page-container>
-    <q-footer bordered class="bg-white text-primary">
+    <q-footer
+      bordered
+      class="bg-white text-primary"
+      v-if="main.getTemplate !== 'auth'"
+    >
       <q-toolbar>
         <q-btn
           no-caps
@@ -101,8 +106,6 @@ const auth = useAuthStore();
 
 const rightDrawerOpen = ref<boolean>(false);
 const selectRegion = ref<boolean>(false);
-
-auth.init();
 
 const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;

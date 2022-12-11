@@ -12,7 +12,7 @@
       <q-card-section class="row justify-between items-center">
         <div class="">
           <div class="text-h5 text-weight-bold">
-            {{ main.getSelectItem.range[0] }}-{{ main.getSelectItem.range[1] }}
+            {{ main.getSelectItem?.range[0] }}-{{ main.getSelectItem?.range[1] }}
             баллов
           </div>
           <q-separator />
@@ -31,8 +31,8 @@
           <q-item>
             <q-item-section>Баланс</q-item-section>
             <q-item-section avatar class="text-weight-bold"
-              >от {{ main.getSelectItem.range[0] }} до
-              {{ main.getSelectItem.range[1] }} баллов</q-item-section
+              >от {{ main.getSelectItem?.range[0] }} до
+              {{ main.getSelectItem?.range[1] }} баллов</q-item-section
             >
           </q-item>
           <q-item>

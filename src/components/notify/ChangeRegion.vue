@@ -9,9 +9,10 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat size="md" label="Отмена" color="red-4" v-close-popup />
+        <q-btn dense flat label="Отмена" color="red-4" v-close-popup />
         <q-btn
-          size="md"
+          dense
+          unelevated
           label="Изменить"
           color="red-4"
           :loading="loading"

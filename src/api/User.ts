@@ -17,6 +17,6 @@ export default async function (METHOD: UserMethods, PARAMS?: Params) {
 type UserMethods = 'get' | 'create' | 'update';
 
 interface Params {
-  id?: number;
+  id?: number | string;
   region?: string;
 }

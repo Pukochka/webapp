@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 import { Products, Items, Regions } from 'src/types';
 
 export const useMainStore = defineStore('main', () => {
-  const template = ref<'catalog' | 'products'>('catalog');
+  const template = ref<'auth' | 'catalog' | 'products'>('auth');
   const template_text = ref<string>('Каталог');
   const select_product = ref<Products>();
   const select_item = ref<Items>();
@@ -20,7 +20,7 @@ export const useMainStore = defineStore('main', () => {
   ) => (change_region.value = { state: state, region: region });
 
   const changeTemplate = (
-    value: 'catalog' | 'products',
+    value: 'auth' | 'catalog' | 'products',
     category?: Products
   ) => {
     if (category) selectProduct(category);

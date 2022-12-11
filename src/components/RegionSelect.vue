@@ -5,7 +5,6 @@
       label="Введите название региона"
       outlined
       color="grey"
-      hint="Для изменения своего региона выберите"
       autofocus
     >
       <template v-slot:append>

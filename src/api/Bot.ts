@@ -14,7 +14,7 @@ export default async function (METHOD: BotMethods, PARAMS?: Params) {
 type BotMethods = 'products' | 'create-order';
 
 interface Params {
-  id?: number;
+  id?: number | string;
   public_key?: string;
   secret_user_key?: string;
   range?: number;

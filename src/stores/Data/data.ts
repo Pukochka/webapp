@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { Regions, UserRegionProducts, User, Products } from 'src/types';
+import { useMainStore } from 'stores/Main/main';
 
 export const useDataStore = defineStore('data', () => {
+  const main = useMainStore();
   const region = ref<Regions[]>([]);
   const user = ref<User>();
   const all_products = ref<UserRegionProducts[]>();
@@ -29,6 +31,7 @@ export const useDataStore = defineStore('data', () => {
   };
 
   const initUser = (value: User) => {
+    if (value.region) main.changeTemplate('catalog');
     user.value = value;
   };
 
