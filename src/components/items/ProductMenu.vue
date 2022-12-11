@@ -46,14 +46,14 @@
           <q-item>
             <q-item-section>Цена</q-item-section>
             <q-item-section avatar class="text-weight-bold"
-              >{{ price }} р</q-item-section
+              >{{ price }} ₽</q-item-section
             >
           </q-item>
           <q-separator />
           <q-item>
             <q-item-section>Итого</q-item-section>
             <q-item-section avatar class="text-weight-bold"
-              >{{ calcPrice }} р
+              >{{ calcPrice }} ₽
             </q-item-section>
           </q-item>
         </q-list>
