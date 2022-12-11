@@ -99,6 +99,7 @@
           square
           class="col-12"
           color="positive"
+          :loading="loading"
           :label="`Оформить заказ  ${counter}  шт.`"
           @click="createOrder"
         />
@@ -149,8 +150,9 @@ const createOrder = () => {
     range: main.getSelectItem?.range[0],
     count: counter.value,
   }).then((response) => {
-    if (response?.data.result) window.Telegram.WebApp.close();
-    else {
+    if (response?.data.result) {
+      window.Telegram.WebApp.close();
+    } else {
       loading.value = false;
       auth.createError({
         state: true,
