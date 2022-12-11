@@ -56,6 +56,5 @@ export const useAuthStore = defineStore('auth', () => {
     errorHadler,
     getUser,
     _init,
-    init,
   };
 });
