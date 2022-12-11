@@ -1,4 +1,48 @@
 <template>
+  <q-card class="my-card" flat bordered>
+    <q-card-section horizontal>
+      <q-card-section class="q-pt-xs">
+        <div class="text-overline">Overline</div>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ product?.range[0] }}-{{ product?.range[1] }} баллов</div>
+        <div class="text-caption text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </q-card-section>
+
+      <q-card-section class="col-5 flex flex-center">
+        <q-img
+          class="rounded-borders"
+          src="https://cdn.quasar.dev/img/parallax2.jpg"
+        />
+      </q-card-section>
+    </q-card-section>
+
+    <q-separator />
+
+    <q-card-actions>
+      <q-btn
+        v-ripple="false"
+        dense
+        flat
+        unelevated
+        color="ref"
+        text-color="red"
+        class="col"
+        align="left"
+        :label="product?.price + ' ₽'"
+      />
+      <q-btn
+        dense
+        flat
+        unelevated
+        color="ref"
+        text-color="red"
+        class="col"
+        label="Купить"
+        @click="openMenu"
+      />
+    </q-card-actions>
+  </q-card>
   <q-item
     class="rounded-borders outiline no-padding shadow-1 relative-position"
   >

@@ -36,6 +36,6 @@ interface Params {
   id?: number | string;
   public_key?: string;
   secret_user_key?: string;
-  range?: Array<number>;
+  range?: number;
   count?: number;
 }

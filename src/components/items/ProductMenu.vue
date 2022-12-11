@@ -146,7 +146,7 @@ const createOrder = () => {
     id: auth.getUser?.telegram_id,
     public_key: config.SECRET,
     secret_user_key: auth.getUser?.secret_user_key,
-    range: main.getSelectItem?.range,
+    range: main.getSelectItem?.range[0],
     count: counter.value,
   }).then((response) => {
     if (response?.data.result) window.Telegram.WebApp.close();
