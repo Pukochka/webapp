@@ -77,10 +77,10 @@
         />
       </q-toolbar>
     </q-footer>
-    <ProductMenu />
-    <HandleError />
-    <ChangeRegion />
   </q-layout>
+  <ProductMenu />
+  <HandleError />
+  <ChangeRegion />
 </template>
 
 <script lang="ts" setup>
