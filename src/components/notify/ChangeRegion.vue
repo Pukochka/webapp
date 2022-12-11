@@ -28,15 +28,17 @@ import { ref } from 'vue';
 import { useMainStore } from 'stores/Main/main';
 import { fetchUserData } from 'src/api';
 import { useDataStore } from 'stores/Data/data';
-import { config } from '../../config';
+import { useAuthStore } from 'stores/Auth/auth';
+
 const main = useMainStore();
 const data = useDataStore();
+const auth = useAuthStore();
 const loading = ref<boolean>(false);
 
 const changeRegion = () => {
   loading.value = true;
   fetchUserData('update', {
-    id: config.BOT_ID,
+    id: auth.getUser?.telegram_id,
     region: main.getChangeRegion.region.new_code,
   }).then((response) => {
     if (response?.data.result) {

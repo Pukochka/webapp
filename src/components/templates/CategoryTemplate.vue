@@ -13,10 +13,22 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { useDataStore } from 'stores/Data/data';
 import CategoryItem from 'components/items/CategoryItem.vue';
+import { fetchBotData } from 'src/api';
+import { useAuthStore } from 'stores/Auth/auth';
 
 const data = useDataStore();
+const auth = useAuthStore();
+
+onMounted(() => {
+  fetchBotData('products', { id: auth.getUser?.telegram_id }).then(
+    (response) => {
+      if (response?.data.result) data.initProducts(response?.data);
+    }
+  );
+});
 </script>
 
 <style lang="scss" scoped></style>

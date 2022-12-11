@@ -30,7 +30,6 @@ export const useAuthStore = defineStore('auth', () => {
                 data.initUser(response.data.data);
                 fetchBotData('products', { id: user.value?.telegram_id }).then(
                   (response) => {
-                    console.log(response);
                     data.initProducts(response?.data);
                     loading.value = false;
                   }
@@ -47,28 +46,6 @@ export const useAuthStore = defineStore('auth', () => {
     } else {
     }
   });
-
-  const init = () => {
-    loading.value = true;
-    fetchUserData('get', { id: 1028741753 }).then((response) => {
-      if (response?.data.result) {
-        data.initUser(response.data.data);
-        fetchBotData('products', { id: 1028741753 }).then((res) => {
-          console.log(res);
-          data.initProducts(res?.data);
-          loading.value = false;
-        });
-        fetchRegionsData('index').then((res) => {
-          if (res?.data.result) {
-            data.initRegions(res.data.data);
-          } else {
-          }
-        });
-      } else {
-        error.value = true;
-      }
-    });
-  };
 
   const getLoading = computed(() => loading.value);
   const getUser = computed(() => user.value);
