@@ -1,5 +1,5 @@
 <template>
-  <q-page class="">
+  <q-page class="bg-white">
     <div class="row no-wrap q-px-md q-pt-md">
       <q-btn
         v-if="main.getTemplate === 'products'"
