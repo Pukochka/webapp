@@ -1,5 +1,5 @@
 <template>
-  <div class="text-h6">Для авторизации, выберите ваш регион</div>
+  <div class="text-subtitle1">Для авторизации, выберите ваш регион</div>
   <div class="q-pa-md">
     <q-input
       v-model="text"
@@ -12,7 +12,7 @@
         <q-icon name="search" color="red-4" size="32px" />
       </template>
     </q-input>
-    <q-scroll-area style="height: 300px">
+    <q-scroll-area style="height: 200px">
       <q-list padding separator>
         <q-item
           clickable

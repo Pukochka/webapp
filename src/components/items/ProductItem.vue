@@ -1,86 +1,40 @@
 <template>
-  <q-card class="my-card" flat bordered>
+  <q-card class="fit column justify-between" flat bordered>
     <q-card-section horizontal>
-      <q-card-section class="q-pt-xs">
+      <q-card-section class="q-pt-xs q-pb-xs">
         <div class="text-overline">Товар</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">
+        <div class="text-h6 q-mt-xs q-mb-xs">
           {{ product?.range[0] }}-{{ product?.range[1] }} баллов
-        </div>
-        <div class="text-caption text-grey">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </div>
       </q-card-section>
     </q-card-section>
+    <div class="">
+      <q-separator />
 
-    <q-separator />
-
-    <q-card-actions>
-      <q-btn
-        v-ripple="false"
-        dense
-        flat
-        unelevated
-        color="ref"
-        text-color="red"
-        class="col"
-        align="left"
-        :label="product?.price + ' ₽'"
-      />
-      <q-btn
-        dense
-        flat
-        unelevated
-        color="ref"
-        text-color="red"
-        class="col"
-        label="Купить"
-        @click="openMenu"
-      />
-    </q-card-actions>
+      <q-card-actions>
+        <q-btn
+          dense
+          flat
+          unelevated
+          color="ref"
+          text-color="red"
+          class="col text-weight-bolder"
+          align="left"
+          :label="product?.price + ' ₽'"
+        />
+        <q-btn
+          dense
+          flat
+          unelevated
+          color="ref"
+          text-color="red"
+          class="col"
+          label="Купить"
+          @click="openMenu"
+        />
+      </q-card-actions>
+    </div>
   </q-card>
-  <!--  <q-item-->
-  <!--    class="rounded-borders outiline no-padding shadow-1 relative-position"-->
-  <!--  >-->
-  <!--    <div-->
-  <!--      class="floating-left absolute rounded-borders bg-red-4 text-caption q-px-sm text-white"-->
-  <!--    >-->
-  <!--      Товар-->
-  <!--    </div>-->
-  <!--    <div class="q-pa-sm flex">-->
-  <!--      <div class="row full-width">-->
-  <!--        <div-->
-  <!--          class="text-bold text-subtitle1 text-black rounded-borders col q-mt-md q-px-sm"-->
-  <!--        >-->
-  <!--          {{ product?.range[0] }}-{{ product?.range[1] }} баллов-->
-  <!--        </div>-->
-  <!--      </div>-->
-
-  <!--      <div class="row full-width q-mt-sm">-->
-  <!--        <q-btn-->
-  <!--          v-ripple="false"-->
-  <!--          dense-->
-  <!--          flat-->
-  <!--          unelevated-->
-  <!--          color="ref"-->
-  <!--          text-color="red"-->
-  <!--          class="col"-->
-  <!--          align="left"-->
-  <!--          :label="product?.price + ' ₽'"-->
-  <!--        />-->
-  <!--        <q-btn-->
-  <!--          dense-->
-  <!--          flat-->
-  <!--          unelevated-->
-  <!--          color="ref"-->
-  <!--          text-color="red"-->
-  <!--          class="col"-->
-  <!--          label="Купить"-->
-  <!--          @click="openMenu"-->
-  <!--        />-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </q-item>-->
 </template>
 
 <script lang="ts" setup>
