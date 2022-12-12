@@ -24,7 +24,7 @@ export const config = {
       ? window.Telegram.WebApp.initData
       : init,
   BOT_ID: bot_id,
-  SECRET: bot_id,
+  SECRET: secret,
 };
 
 interface Config {
