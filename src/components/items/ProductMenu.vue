@@ -18,6 +18,9 @@
             баллов
           </div>
           <q-separator />
+          <div class="text-caption text-grey">
+            осталось {{ main.getSelectItem?.amount ?? 0 }} шт.
+          </div>
         </div>
 
         <q-btn
@@ -74,7 +77,7 @@
             unelevated
             color="red-5"
             icon="add"
-            :disable="counter >= 20"
+            :disable="condition.value"
             @click="increment"
           />
         </div>
@@ -84,9 +87,18 @@
             class="col-12"
             unelevated
             color="red-5"
-            :label="`Добавить ${counter === 20 ? '' : 20 - counter}`"
-            @click="counter = 20"
-            :disable="counter === 20"
+            :label="`Добавить ${
+              main.getSelectItem?.amount >= 20
+                ? 20 - counter
+                : main.getSelectItem?.amount
+            }`"
+            @click="
+              counter =
+                main.getSelectItem?.amount >= 20
+                  ? 20
+                  : main.getSelectItem?.amount
+            "
+            :disable="counter === 20 || counter >= main.getSelectItem?.amount"
           />
         </div>
         <div class="text-caption text-grey">
@@ -99,6 +111,7 @@
           square
           class="col-12"
           color="positive"
+          v-if="main.getSelectItem?.amount"
           :loading="loading"
           :label="`Оформить заказ  ${counter}  шт.`"
           @click="createOrder"
@@ -109,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onUpdated } from 'vue';
+import { ref, computed, onUpdated, watch } from 'vue';
 import { useMainStore } from 'stores/Main/main';
 import { useQuasar } from 'quasar';
 import { fetchBotData } from 'src/api';
@@ -124,15 +137,36 @@ const counter = ref<number>(1);
 const price = ref<number | undefined>(100);
 const loading = ref<boolean>(false);
 
-const increment = () => {
-  counter.value++;
-  if (counter.value === 20) {
+const condition = computed(
+  () => counter.value < (main.getSelectItem?.amount ?? 0) && counter.value < 20
+);
+
+watch(counter, (val) => {
+  if (val === 20) {
     $q.notify({
       message: 'За один раз можно купить не более 20 шт.',
       position: 'top',
       timeout: 3000,
     });
   }
+  if (val === main.getSelectItem?.amount) {
+    $q.notify({
+      message: 'Товара не осталось!',
+      position: 'top',
+      timeout: 3000,
+    });
+  }
+});
+const increment = () => {
+  if (condition.value) counter.value++;
+  console.log(condition.value);
+  // if (counter.value === 20) {
+  //   $q.notify({
+  //     message: 'За один раз можно купить не более 20 шт.',
+  //     position: 'top',
+  //     timeout: 3000,
+  //   });
+  // }
 };
 
 const decrement = () => {
