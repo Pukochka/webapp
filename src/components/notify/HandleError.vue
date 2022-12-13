@@ -9,10 +9,6 @@
         {{ auth.errorHadler.message }}
       </q-card-section>
 
-      <q-card-section class="q-pt-none">
-        {{ config.INIT_DATA }}
-      </q-card-section>
-
       <q-card-actions align="right">
         <q-btn flat size="md" label="Закрыть" color="red" v-close-popup />
         <q-btn

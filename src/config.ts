@@ -17,11 +17,11 @@ for (const item of new URLSearchParams(window.location.search)) {
   if (item[0] === '#tgWebAppData') init = item[1];
 }
 
-for (const [key, value] of new URLSearchParams(
-  window.Telegram.WebApp.initData
-)) {
-  test[key] = value;
-}
+// for (const [key, value] of new URLSearchParams(
+//   window.Telegram.WebApp.initData
+// )) {
+//   test[key] = value;
+// }
 
 export const config = {
   HOST: 'https://m.bot-t.com',
