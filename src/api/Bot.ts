@@ -20,7 +20,9 @@ export default async function (METHOD: BotMethods, PARAMS?: Params) {
     param += `&count=${PARAMS.count}`;
   }
   try {
-    return await axios.get(config.HOST + '/bot/' + METHOD + param);
+    return await axios.post(config.HOST + '/bot/' + METHOD + param, {
+      public_key: config.SECRET,
+    });
   } catch (e) {
     error.createError({
       state: true,

@@ -2,14 +2,14 @@ import axios from 'axios';
 import { config } from 'src/config';
 import { useAuthStore } from 'stores/Auth/auth';
 
-export default async function (auth_str: string) {
+export default async function (userData) {
   const error = useAuthStore()
   try {
     return await axios.post(
-      `https://api.bot-t.com/v1/module/bot/check-hash?${auth_str}`,
-      {
+      'https://api.bot-t.com/v1/module/bot/check-hash-post',
+      Object.assign({
         bot_id: config.BOT_ID,
-      }
+      },userData)
     );
   } catch (e) {
     error.createError({
