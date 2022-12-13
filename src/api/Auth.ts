@@ -9,7 +9,7 @@ export default async function (userData) {
       'https://api.bot-t.com/v1/module/bot/check-hash-post',
       {
         bot_id: config.BOT_ID,
-        post: userData,
+        userData,
       }
     );
   } catch (e) {
