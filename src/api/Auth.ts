@@ -3,20 +3,20 @@ import { config } from 'src/config';
 import { useAuthStore } from 'stores/Auth/auth';
 
 export default async function (userData) {
-  const error = useAuthStore()
+  const error = useAuthStore();
   try {
     return await axios.post(
       'https://api.bot-t.com/v1/module/bot/check-hash-post',
-      Object.assign({
+      {
         bot_id: config.BOT_ID,
-      },userData)
+        post: userData,
+      }
     );
   } catch (e) {
     error.createError({
-      state:true,
-      message:'Проблемы с интернетом. Попробуйте перезагрузить страницу.',
-      reload:true,
-    })
+      state: true,
+      message: 'Проблемы с интернетом. Попробуйте перезагрузить страницу.',
+      reload: true,
+    });
   }
 }
-
