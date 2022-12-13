@@ -17,7 +17,9 @@ for (const item of new URLSearchParams(window.location.search)) {
   if (item[0] === '#tgWebAppData') init = item[1];
 }
 
-for (const [key, value] of new URLSearchParams(window.location.search)) {
+for (const [key, value] of new URLSearchParams(
+  window.Telegram.WebApp.initData
+)) {
   test[key] = value;
 }
 const user = JSON.parse(test.user);
