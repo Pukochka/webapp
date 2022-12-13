@@ -5,7 +5,7 @@ declare global {
 }
 
 window.Telegram = window.Telegram || {};
-
+window.Telegram.WebApp.enableClosingConfirmation();
 let bot_id = '';
 let secret = '';
 let init = '';
@@ -22,8 +22,6 @@ for (const [key, value] of new URLSearchParams(
 )) {
   test[key] = value;
 }
-const user = JSON.parse(test.user);
-test.user = user;
 
 export const config = {
   HOST: 'https://m.bot-t.com',
