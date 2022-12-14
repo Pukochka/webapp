@@ -38,7 +38,7 @@ const loading = ref<boolean>(false);
 const changeRegion = () => {
   loading.value = true;
   fetchUserData('update', {
-    id: auth.getUser?.telegram_id,
+    id: auth.getUser?.user.telegram_id,
     region: main.getChangeRegion.region.new_code,
   }).then((response) => {
     if (response?.data.result) {

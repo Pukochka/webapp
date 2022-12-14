@@ -23,11 +23,16 @@ const data = useDataStore();
 const auth = useAuthStore();
 
 onMounted(() => {
-  fetchBotData('products', { id: auth.getUser?.telegram_id }).then(
-    (response) => {
-      if (response?.data.result) data.initProducts(response?.data);
+  fetchBotData('products').then((response) => {
+    if (response?.data.result) data.initProducts(response?.data);
+    else {
+      auth.createError({
+        state: true,
+        message: response?.data.message,
+        reload: false,
+      });
     }
-  );
+  });
 });
 </script>
 

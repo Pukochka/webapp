@@ -37,19 +37,19 @@ export const useAuthStore = defineStore('auth', () => {
   fetchRegionsData('index').then((response) => {
     if (response?.data.result) {
       data.initRegions(response.data.data);
-      userAuth(`${config.INIT_DATA}`).then((response) => {
+      userAuth().then((response) => {
         if (response?.data.result) {
           user.value = response.data.data;
-          fetchUserData('get', { id: user.value?.telegram_id }).then(
+          fetchUserData('get', { id: user.value?.user.telegram_id }).then(
             (response) => {
               if (response?.data.result) {
                 data.initUser(response.data.data);
-                fetchBotData('products', { id: user.value?.telegram_id }).then(
-                  (response) => {
-                    data.initProducts(response?.data);
-                    loading.value = false;
-                  }
-                );
+                fetchBotData('products', {
+                  id: user.value?.user.telegram_id,
+                }).then((response) => {
+                  data.initProducts(response?.data);
+                  loading.value = false;
+                });
               } else {
                 loading.value = false;
               }
@@ -57,18 +57,18 @@ export const useAuthStore = defineStore('auth', () => {
           );
         } else {
           createError({
-            state:true,
-            message:response?.data.message,
-            reload:true,
-          })
+            state: true,
+            message: response?.data.message,
+            reload: true,
+          });
         }
       });
     } else {
       createError({
-        state:true,
-        message:response?.data.message,
-        reload:true,
-      })
+        state: true,
+        message: response?.data.message,
+        reload: true,
+      });
     }
   });
 

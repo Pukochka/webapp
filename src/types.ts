@@ -26,17 +26,29 @@ export interface User {
 }
 
 export interface TelegramUser {
-  balance: string;
   created_at: string;
-  currency: string;
-  first_name: string;
-  id: number;
-  last_name: string;
-  ref_id: number;
+  money: {
+    balance: string;
+    currency: {
+      code: string;
+      id: number;
+      letter: string;
+    };
+  };
+  user: {
+    first_name: string;
+    id: number;
+    last_name: string;
+    link: string;
+    telegram_id: string;
+    type: {
+      id: number;
+      title: string;
+    };
+    username: string;
+  };
   secret_user_key: string;
-  source: null;
   system_user_id: number;
-  telegram_id: string;
+
   updated_at: string;
-  username: string;
 }

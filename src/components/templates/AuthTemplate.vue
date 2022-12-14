@@ -74,7 +74,7 @@ const text = ref<string>('');
 
 const register = () => {
   fetchUserData('create', {
-    id: auth.getUser?.telegram_id,
+    id: auth.getUser?.user.telegram_id,
     region: selected_region.value.new_code,
   }).then((response) => {
     if (response?.data.result) {

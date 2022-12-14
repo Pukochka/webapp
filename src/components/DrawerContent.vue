@@ -1,10 +1,10 @@
 <template>
   <div class="bg-red-1 q-pa-md rounded-borders q-ma-md">
     <div class="text-h5 text-weight-bolder">
-      {{ user.getUser?.first_name }} {{ user.getUser?.last_name }}
+      {{ user.getUser?.user.first_name }} {{ user.getUser?.user.last_name }}
     </div>
     <div class="text-caption text-weight-bolder text-red-4">
-      {{ user.getUser?.username }}
+      {{ user.getUser?.user.link }}
     </div>
   </div>
   <q-list padding class="q-px-md column q-gutter-xs">
@@ -30,7 +30,7 @@
       ><q-item-section>Баланс</q-item-section>
       <q-item-section avatar>
         <div class="text-red-4 text-subtitle1">
-          {{ user.getUser?.balance + user.getUser?.currency }}
+          {{ user.getUser?.money.balance + user.getUser?.money.currency.letter }}
         </div>
       </q-item-section>
     </q-item>

@@ -18,9 +18,6 @@
             баллов
           </div>
           <q-separator />
-          <div class="text-caption text-grey">
-            осталось {{ main.getSelectItem?.amount ?? 0 }} шт.
-          </div>
         </div>
 
         <q-btn
