@@ -75,7 +75,7 @@
             unelevated
             color="red-5"
             icon="add"
-            :disable="condition.value"
+            :disable="condition.value || counter === main.getSelectItem?.amount"
             @click="increment"
           />
         </div>
@@ -96,11 +96,7 @@
                   ? 20
                   : main.getSelectItem?.amount
             "
-            :disable="
-              counter === 20 ||
-              counter === main.getSelectItem?.amount ||
-              !main.getSelectItem?.amount
-            "
+            :disable="counter === 20 || counter === main.getSelectItem?.amount"
           />
         </div>
         <div class="text-caption text-grey" v-if="main.getSelectItem?.amount">

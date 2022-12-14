@@ -1,7 +1,9 @@
 <template>
   <div class="q-py-md">
+    <div class="text-h6 text-center text-grey" v-if="!data.getProducts.length">
+      Товаров не осталось
+    </div>
     <div class="row q-col-gutter-sm">
-      <div class="text-h6 text-center text-grey">Товаров не осталось</div>
       <div
         class="col-6"
         v-for="(category, index) in data.getProducts"
