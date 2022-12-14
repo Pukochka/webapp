@@ -5,6 +5,7 @@
         class="col-6"
         v-for="(product, index) in main.getSelectProduct.items"
         :key="index"
+        v-show="product.amount"
       >
         <ProductItem :product="product" />
       </div>

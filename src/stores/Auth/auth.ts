@@ -44,9 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
             (response) => {
               if (response?.data.result) {
                 data.initUser(response.data.data);
-                fetchBotData('products', {
-                  id: user.value?.user.telegram_id,
-                }).then((response) => {
+                fetchBotData('products').then((response) => {
                   data.initProducts(response?.data);
                   loading.value = false;
                 });
