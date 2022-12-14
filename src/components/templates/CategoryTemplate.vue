@@ -1,6 +1,6 @@
 <template>
   <div class="q-py-md">
-    <div class="text-h6 text-center text-grey" v-if="!data.getProducts.length">
+    <div class="text-h6 text-center text-grey" v-if="!data.getProducts">
       Товаров не осталось
     </div>
     <div class="row q-col-gutter-sm">
@@ -27,7 +27,6 @@ const auth = useAuthStore();
 
 onMounted(() => {
   fetchBotData('products').then((response) => {
-    console.log(response);
     if (response?.status === 200) {
       data.initProducts(response?.data);
     } else {
