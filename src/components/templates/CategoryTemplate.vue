@@ -1,6 +1,7 @@
 <template>
   <div class="q-py-md">
     <div class="row q-col-gutter-sm">
+      <div class="text-h6 text-center text-grey">Товаров не осталось</div>
       <div
         class="col-6"
         v-for="(category, index) in data.getProducts"
@@ -25,12 +26,12 @@ const auth = useAuthStore();
 onMounted(() => {
   fetchBotData('products').then((response) => {
     console.log(response);
-    if (response?.data.result) {
+    if (response?.status === 200) {
       data.initProducts(response?.data);
     } else {
       auth.createError({
         state: true,
-        message: response?.data.message + 'dasdad',
+        message: response?.data.message,
         reload: false,
       });
     }

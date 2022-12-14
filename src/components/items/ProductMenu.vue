@@ -96,7 +96,11 @@
                   ? 20
                   : main.getSelectItem?.amount
             "
-            :disable="counter === 20 || counter === main.getSelectItem?.amount"
+            :disable="
+              counter === 20 ||
+              counter === main.getSelectItem?.amount ||
+              !main.getSelectItem?.amount
+            "
           />
         </div>
         <div class="text-caption text-grey" v-if="main.getSelectItem?.amount">
