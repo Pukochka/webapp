@@ -37,7 +37,7 @@
               {{ main.getSelectItem?.range[1] }} баллов</q-item-section
             >
           </q-item>
-          <q-item>
+          <q-item v-if="main.getSelectItem?.amount">
             <q-item-section>Количество</q-item-section>
             <q-item-section avatar class="text-weight-bold"
               >{{ counter }} шт.</q-item-section
@@ -49,8 +49,8 @@
               >{{ price }} ₽</q-item-section
             >
           </q-item>
-          <q-separator />
-          <q-item>
+          <q-separator v-if="main.getSelectItem?.amount" />
+          <q-item v-if="main.getSelectItem?.amount">
             <q-item-section>Итого</q-item-section>
             <q-item-section avatar class="text-weight-bold"
               >{{ calcPrice }} ₽
@@ -59,6 +59,7 @@
         </q-list>
         <div
           class="menu-outline row justify-between items-center rounded-borders"
+          v-if="main.getSelectItem?.amount"
         >
           <q-btn
             flat
@@ -78,7 +79,7 @@
             @click="increment"
           />
         </div>
-        <div class="row q-mt-sm">
+        <div class="row q-mt-sm" v-if="main.getSelectItem?.amount">
           <q-btn
             flat
             class="col-12"
@@ -98,8 +99,14 @@
             :disable="counter === 20 || counter >= main.getSelectItem?.amount"
           />
         </div>
-        <div class="text-caption text-grey">
+        <div class="text-caption text-grey" v-if="main.getSelectItem?.amount">
           За один раз можно купить 20 шт.
+        </div>
+        <div
+          class="text-grey text-subtitle1 text-center"
+          v-if="!main.getSelectItem?.amount"
+        >
+          Товара не осталось.
         </div>
       </q-card-section>
       <div class="row">
@@ -157,13 +164,6 @@ watch(counter, (val) => {
 const increment = () => {
   if (condition.value) counter.value++;
   console.log(condition.value);
-  // if (counter.value === 20) {
-  //   $q.notify({
-  //     message: 'За один раз можно купить не более 20 шт.',
-  //     position: 'top',
-  //     timeout: 3000,
-  //   });
-  // }
 };
 
 const decrement = () => {
@@ -175,7 +175,7 @@ const calcPrice = computed(() => price.value * counter.value);
 const createOrder = () => {
   loading.value = true;
   fetchBotData('create-order', {
-    id: auth.getUser?.telegram_id,
+    id: auth.getUser?.user.telegram_id,
     public_key: config.SECRET,
     secret_user_key: auth.getUser?.secret_user_key,
     range: main.getSelectItem?.range[0],
