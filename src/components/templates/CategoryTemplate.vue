@@ -24,6 +24,7 @@ const auth = useAuthStore();
 
 onMounted(() => {
   fetchBotData('products').then((response) => {
+    console.log(response);
     if (response?.data.result) {
       data.initProducts(response?.data);
     } else {

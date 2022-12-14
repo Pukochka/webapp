@@ -96,7 +96,7 @@
                   ? 20
                   : main.getSelectItem?.amount
             "
-            :disable="counter === 20 || counter >= main.getSelectItem?.amount"
+            :disable="counter === 20 || counter === main.getSelectItem?.amount"
           />
         </div>
         <div class="text-caption text-grey" v-if="main.getSelectItem?.amount">
@@ -162,8 +162,15 @@ watch(counter, (val) => {
   }
 });
 const increment = () => {
-  if (condition.value) counter.value++;
-  console.log(condition.value);
+  if (condition.value) {
+    counter.value++;
+  } else {
+    $q.notify({
+      message: 'Товара не осталось!',
+      position: 'top',
+      timeout: 3000,
+    });
+  }
 };
 
 const decrement = () => {
