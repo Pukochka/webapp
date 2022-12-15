@@ -15,7 +15,7 @@ for (const item of new URLSearchParams(window.location.search)) {
   if (item[0] === 'secretKey') secret = item[1];
   if (item[0] === '#tgWebAppData') init = item[1];
 }
-
+console.log(init, 'init');
 // for (const [key, value] of new URLSearchParams(
 //   window.Telegram.WebApp.initData
 // )) {
