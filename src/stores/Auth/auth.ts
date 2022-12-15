@@ -34,61 +34,39 @@ export const useAuthStore = defineStore('auth', () => {
     };
   };
 
+  const userInitDataAuth = () => {
+    if (config.IS_REPLY) return userAuthPeply();
+    else return userAuth();
+  };
   const _init = () => (loading.value = true);
   fetchRegionsData('index').then((response) => {
     if (response?.data.result) {
       data.initRegions(response.data.data);
-      if (config.IS_REPLY) {
-        userAuthPeply().then((response) => {
-          if (response?.data.result) {
-            user.value = response.data.data;
-            fetchUserData('get', { id: user.value?.user.telegram_id }).then(
-              (response) => {
-                if (response?.data.result) {
-                  data.initUser(response.data.data);
-                  fetchBotData('products').then((response) => {
-                    data.initProducts(response?.data);
-                    loading.value = false;
-                  });
-                } else {
+
+      userInitDataAuth().then((response) => {
+        if (response?.data.result) {
+          user.value = response.data.data;
+          fetchUserData('get', { id: user.value?.user.telegram_id }).then(
+            (response) => {
+              if (response?.data.result) {
+                data.initUser(response.data.data);
+                fetchBotData('products').then((response) => {
+                  data.initProducts(response?.data);
                   loading.value = false;
-                }
+                });
+              } else {
+                loading.value = false;
               }
-            );
-          } else {
-            createError({
-              state: true,
-              message: response?.data.message,
-              reload: true,
-            });
-          }
-        });
-      } else {
-        userAuth().then((response) => {
-          if (response?.data.result) {
-            user.value = response.data.data;
-            fetchUserData('get', { id: user.value?.user.telegram_id }).then(
-              (response) => {
-                if (response?.data.result) {
-                  data.initUser(response.data.data);
-                  fetchBotData('products').then((response) => {
-                    data.initProducts(response?.data);
-                    loading.value = false;
-                  });
-                } else {
-                  loading.value = false;
-                }
-              }
-            );
-          } else {
-            createError({
-              state: true,
-              message: response?.data.message,
-              reload: true,
-            });
-          }
-        });
-      }
+            }
+          );
+        } else {
+          createError({
+            state: true,
+            message: response?.data.message,
+            reload: true,
+          });
+        }
+      });
     } else {
       createError({
         state: true,
@@ -101,6 +79,7 @@ export const useAuthStore = defineStore('auth', () => {
   const getLoading = computed(() => loading.value);
   const getUser = computed(() => user.value);
   const errorHadler = computed(() => error.value);
+
   return {
     user,
     getLoading,
