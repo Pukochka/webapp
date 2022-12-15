@@ -5,6 +5,7 @@ import {
   fetchRegionsData,
   fetchUserData,
   userAuth,
+  userAuthPeply,
 } from 'src/api';
 import { useDataStore } from 'stores/Data/data';
 import { config } from 'src/config';
@@ -37,30 +38,57 @@ export const useAuthStore = defineStore('auth', () => {
   fetchRegionsData('index').then((response) => {
     if (response?.data.result) {
       data.initRegions(response.data.data);
-      userAuth().then((response) => {
-        if (response?.data.result) {
-          user.value = response.data.data;
-          fetchUserData('get', { id: user.value?.user.telegram_id }).then(
-            (response) => {
-              if (response?.data.result) {
-                data.initUser(response.data.data);
-                fetchBotData('products').then((response) => {
-                  data.initProducts(response?.data);
+      if (config.IS_REPLY) {
+        userAuthPeply().then((response) => {
+          if (response?.data.result) {
+            user.value = response.data.data;
+            fetchUserData('get', { id: user.value?.user.telegram_id }).then(
+              (response) => {
+                if (response?.data.result) {
+                  data.initUser(response.data.data);
+                  fetchBotData('products').then((response) => {
+                    data.initProducts(response?.data);
+                    loading.value = false;
+                  });
+                } else {
                   loading.value = false;
-                });
-              } else {
-                loading.value = false;
+                }
               }
-            }
-          );
-        } else {
-          createError({
-            state: true,
-            message: response?.data.message,
-            reload: true,
-          });
-        }
-      });
+            );
+          } else {
+            createError({
+              state: true,
+              message: response?.data.message,
+              reload: true,
+            });
+          }
+        });
+      } else {
+        userAuth().then((response) => {
+          if (response?.data.result) {
+            user.value = response.data.data;
+            fetchUserData('get', { id: user.value?.user.telegram_id }).then(
+              (response) => {
+                if (response?.data.result) {
+                  data.initUser(response.data.data);
+                  fetchBotData('products').then((response) => {
+                    data.initProducts(response?.data);
+                    loading.value = false;
+                  });
+                } else {
+                  loading.value = false;
+                }
+              }
+            );
+          } else {
+            createError({
+              state: true,
+              message: response?.data.message,
+              reload: true,
+            });
+          }
+        });
+      }
     } else {
       createError({
         state: true,

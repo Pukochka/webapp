@@ -1,6 +1,12 @@
 import fetchRegionsData from './Region';
 import fetchBotData from './Bot';
 import fetchUserData from './User';
-import userAuth from './Auth';
+import userAuth, { userAuthPeply } from './Auth';
 
-export { fetchRegionsData, fetchBotData, fetchUserData, userAuth };
+export {
+  fetchRegionsData,
+  fetchBotData,
+  fetchUserData,
+  userAuth,
+  userAuthPeply,
+};
